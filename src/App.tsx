@@ -15,6 +15,7 @@ function App() {
   const mapContainerRef = useRef<HTMLDivElement>(null)
   const mapInstance = useRef<any>()
 
+  // 上传图片
   const draggerProps: UploadProps = {
     name: 'file',
     multiple: true,
@@ -35,9 +36,8 @@ function App() {
     },
   }
 
+  // 初始化 map instance
   useEffect(() => {
-    console.log(window.AMap)
-
     if (window.AMap) {
       const scale = new window.AMap.Scale()
 
@@ -104,6 +104,7 @@ function App() {
     }
   }, [])
 
+  // 裁剪图片实例
   const cropperRef = useRef<{ cropper: Cropper }>({
     cropper: null,
   })
@@ -117,16 +118,6 @@ function App() {
 
       cropperRef.current.cropper = new Cropper(img, {
         aspectRatio: 16 / 9,
-        autoCrop: false,
-        crop(event) {
-          console.log(event.detail.x)
-          console.log(event.detail.y)
-          console.log(event.detail.width)
-          console.log(event.detail.height)
-          console.log(event.detail.rotate)
-          console.log(event.detail.scaleX)
-          console.log(event.detail.scaleY)
-        },
       })
     }
   }
@@ -134,7 +125,12 @@ function App() {
   const handleImageData = () => {
     if (cropperRef.current.cropper) {
       const data = cropperRef.current.cropper.getCroppedCanvas().toDataURL('image/png')
+      // base64编码 数据 传给后端
+      // TO DO
       console.log(data)
+
+      // 代表 当前屏幕中一米代表实际距离多少米 传给后端
+      const scale = mapInstance.current.getScale()
     }
   }
 
@@ -145,10 +141,7 @@ function App() {
       </div>
       <div id="map_container" className="map_container" ref={mapContainerRef} style={{ flex: '0 0 70%', height: '100vh', border: '1px solid #000', boxSizing: 'border-box' }}></div>
       <div id="op" style={{ height: '100vh', width: '30%' }}>
-        <div>
-          <Button onClick={() => handleImageData()}>Get Data</Button>
-        </div>
-        <Button
+        {/* <Button
           onClick={() => {
             new ScreenShot({
               enableWebRtc: true,
@@ -163,9 +156,8 @@ function App() {
           }}
         >
           选取区域
-        </Button>
-
-        <Button
+        </Button> */}
+        {/* <Button
           onClick={() => {
             html2canvas(document.getElementById('root')).then((canvas) => {
               const img = document.createElement('img')
@@ -177,33 +169,48 @@ function App() {
           }}
         >
           选取区域2
-        </Button>
-
+        </Button> */}
         <Button
           onClick={() => {
-            console.log('fas')
             const screenshot = new scs(mapInstance.current)
-            function screenMap() {
+            ;(function screenMap() {
               screenshot.toDataURL().then((url) => {
-                //console.log('url: ', url)
                 handleImage(url)
               })
-            }
-
-            screenMap()
+            })()
           }}
         >
-          选取区域3
+          选取区域
         </Button>
-        <div style={{ height: 200, padding: 12 }}>
+        <Button
+          onClick={() => {
+            if (cropperRef.current.cropper) {
+              cropperRef.current.cropper.destroy()
+              const img_container = document.getElementById('img_container_mask')
+              if (img_container) {
+                img_container.style.display = 'none'
+              }
+            }
+          }}
+        >
+          取消
+        </Button>
+        <div>
+          <Button onClick={() => handleImageData()}>Compute</Button>
+        </div>
+
+        {/* 上传逻辑 */}
+        {/* <div style={{ height: 200, padding: 12 }}>
           <Dragger {...draggerProps}>
             <p className="ant-upload-drag-icon">
               <InboxOutlined />
             </p>
             <p className="ant-upload-text">Click or drag Image to this area to upload</p>
           </Dragger>
-        </div>
-        <div
+        </div> */}
+
+        {/* 粘贴图逻辑 */}
+        {/* <div
           id="paste"
           className="paste_area"
           style={{ height: 200, padding: 12, backgroundColor: '#eee' }}
@@ -243,7 +250,7 @@ function App() {
           <Button type="primary" onClick={() => {}}>
             compute
           </Button>
-        </div>
+        </div> */}
       </div>
     </div>
   )
