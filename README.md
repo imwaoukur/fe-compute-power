@@ -4,6 +4,17 @@
 
 Vite + React + Typescript + pnpm
 
+### 环境：
+
+- node > 14.0
+- npm
+
+### 启动
+
+- npm install -g pnpm
+- pnpm install
+- pnpm dev
+
 ## reference
 
 - 高德地图 https://lbs.amap.com/api/javascript-api/guide/abc/prepare
