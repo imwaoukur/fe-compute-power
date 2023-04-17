@@ -1,136 +1,67 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { InboxOutlined } from '@ant-design/icons'
-import type { UploadProps } from 'antd'
+import { Result, Space, Spin, UploadProps } from 'antd'
 import { message, Upload, Button } from 'antd'
-import ScreenShot from 'js-web-screen-shot'
-import html2canvas from 'html2canvas'
-import ReactCropper, { ReactCropperElement } from 'react-cropper'
 import 'cropperjs/dist/cropper.css'
-import { Screenshot as scs } from '@amap/screenshot'
-const { Dragger } = Upload
+import { Screenshot } from '@amap/screenshot'
 import Cropper from 'cropperjs'
-import './App.css'
+import { computePowerByImage } from './services'
+import AMap from './components/map'
 
 function App() {
-  const mapContainerRef = useRef<HTMLDivElement>(null)
-  const mapInstance = useRef<any>()
-
-  // 上传图片
-  const draggerProps: UploadProps = {
-    name: 'file',
-    multiple: true,
-    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-    onChange(info) {
-      const { status } = info.file
-      if (status !== 'uploading') {
-        console.log(info.file, info.fileList)
-      }
-      if (status === 'done') {
-        message.success(`${info.file.name} file uploaded successfully.`)
-      } else if (status === 'error') {
-        message.error(`${info.file.name} file upload failed.`)
-      }
-    },
-    onDrop(e) {
-      console.log('Dropped files', e.dataTransfer.files)
-    },
-  }
-
-  // 初始化 map instance
-  useEffect(() => {
-    if (window.AMap) {
-      const scale = new window.AMap.Scale()
-
-      const toolBar = new window.AMap.ToolBar({
-        position: {
-          top: '20px',
-          right: '40px',
-        },
-      })
-
-      const controlBar = new window.AMap.ControlBar({
-        position: {
-          top: '20px',
-          right: '20px',
-        },
-      })
-
-      mapInstance.current = new window.AMap.Map('map_container', {
-        center: [119.4, 32.38],
-        expandZoomRange: true,
-        zoom: 14,
-        zooms: [3, 20],
-        layers: [
-          // new window.AMap.TileLayer(),
-          // 卫星
-          new window.AMap.TileLayer.Satellite(),
-          // 路网
-          // new window.AMap.TileLayer.RoadNet(),
-        ],
-        WebGLParams: {
-          preserveDrawingBuffer: true,
-        },
-      })
-
-      mapInstance.current && mapInstance.current.addControl(scale)
-      mapInstance.current && mapInstance.current.addControl(toolBar)
-      // mapInstance.current && mapInstance.current.addControl(controlBar)
-
-      const mouseTool = new window.AMap.MouseTool(mapInstance.current)
-      ;(function drawRectangle() {
-        mouseTool.rectangle({
-          strokeColor: 'red',
-          strokeOpacity: 0.5,
-          strokeWeight: 6,
-          fillColor: 'blue',
-          fillOpacity: 0.5,
-          // strokeStyle还支持 solid
-          strokeStyle: 'solid',
-          // strokeDasharray: [30,10],
-        })
-      })()
-
-      mouseTool.on('draw', function (event) {
-        // event.obj 为绘制出来的覆盖物对象
-        console.log(event)
-        console.info('覆盖物对象绘制完成')
-      })
-    }
-
-    return () => {
-      if (mapInstance.current && typeof mapInstance.current.destory === 'function') {
-        mapInstance.current.destory()
-      }
-    }
-  }, [])
+  const [cropLoading, setCropLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
+  // 地图实例
+  const mapIns = useRef<any>()
 
   // 裁剪图片实例
-  const cropperRef = useRef<{ cropper: Cropper }>({
-    cropper: null,
-  })
+  const cropperRef = useRef<any>()
 
-  const handleImage = (url) => {
-    const img_container = document.getElementById('img_container_mask')
-    const img: HTMLImageElement = document.getElementById('uniq_img')
-    if (img && img_container) {
-      img_container.style.display = 'block'
-      img.src = url
+  const handleCropImage = () => {
+    setCropLoading(true)
+    const screenshot = new Screenshot(mapIns.current)
+    screenshot
+      .toDataURL()
+      .then((url) => {
+        const img_container = document.getElementById('img_container_mask')
+        const img = document.getElementById('uniq_img') as HTMLImageElement
+        if (img && img_container) {
+          img_container.style.display = 'block'
+          img.src = url
 
-      cropperRef.current.cropper = new Cropper(img, {
-        aspectRatio: 16 / 9,
+          cropperRef.current = new Cropper(img, {
+            aspectRatio: 16 / 9,
+          })
+        }
       })
-    }
+      .finally(() => {
+        setCropLoading(false)
+      })
   }
 
   const handleImageData = () => {
-    if (cropperRef.current.cropper) {
-      const data = cropperRef.current.cropper.getCroppedCanvas().toDataURL('image/png')
-      // base64编码 数据 传给后端
-      // TO DO
-      console.log(data)
-
+    if (cropperRef.current) {
+      setLoading(true)
+      const imgBase64 = cropperRef.current.getCroppedCanvas().toDataURL('image/png')
       // 代表 当前屏幕中一米代表实际距离多少米 传给后端
-      const scale = mapInstance.current.getScale()
+      const scale = mapIns.current.getScale()
+
+      computePowerByImage(imgBase64, scale)
+        .then((res) => {
+          console.log(res)
+        })
+        .finally(() => {
+          setLoading(false)
+        })
+    }
+  }
+
+  const cancelCropImage = () => {
+    if (cropperRef.current) {
+      cropperRef.current.destroy()
+      const img_container = document.getElementById('img_container_mask')
+      if (img_container) {
+        img_container.style.display = 'none'
+      }
     }
   }
 
@@ -139,64 +70,29 @@ function App() {
       <div id="img_container_mask" style={{ position: 'absolute', top: 0, left: 0, width: '70%', height: '100%', zIndex: 999999, backgroundColor: '#ddd', opacity: 1, display: 'none' }}>
         <img id="uniq_img" src="" alt="" style={{ width: '70%', height: '100%' }} />
       </div>
-      <div id="map_container" className="map_container" ref={mapContainerRef} style={{ flex: '0 0 70%', height: '100vh', border: '1px solid #000', boxSizing: 'border-box' }}></div>
-      <div id="op" style={{ height: '100vh', width: '30%' }}>
-        {/* <Button
-          onClick={() => {
-            new ScreenShot({
-              enableWebRtc: true,
-              completeCallback: (data) => {
-                console.log(data)
-                console.log('2345')
-              },
-              triggerCallback: () => {
-                console.log(234)
-              },
-            })
-          }}
-        >
-          选取区域
-        </Button> */}
-        {/* <Button
-          onClick={() => {
-            html2canvas(document.getElementById('root')).then((canvas) => {
-              const img = document.createElement('img')
-              img.src = canvas.toDataURL()
-              // link.setAttribute('download', title + '.png')
-              // link.style.display = 'none'
-              document.body.appendChild(img)
-            })
-          }}
-        >
-          选取区域2
-        </Button> */}
-        <Button
-          onClick={() => {
-            const screenshot = new scs(mapInstance.current)
-            ;(function screenMap() {
-              screenshot.toDataURL().then((url) => {
-                handleImage(url)
-              })
-            })()
-          }}
-        >
-          选取区域
-        </Button>
-        <Button
-          onClick={() => {
-            if (cropperRef.current.cropper) {
-              cropperRef.current.cropper.destroy()
-              const img_container = document.getElementById('img_container_mask')
-              if (img_container) {
-                img_container.style.display = 'none'
-              }
-            }
-          }}
-        >
-          取消
-        </Button>
-        <div>
-          <Button onClick={() => handleImageData()}>Compute</Button>
+      <div id="map_container" style={{ flex: '0 0 70%', height: '100vh', border: '1px solid #000', boxSizing: 'border-box' }}>
+        <AMap mapIns={mapIns}></AMap>
+      </div>
+      <div id="op" style={{ height: '100vh', width: '30%', padding: '16px 8px' }}>
+        <div style={{}}>
+          <Space>
+            <Button size="large" type="primary" loading={cropLoading} onClick={() => handleCropImage()}>
+              选取区域
+            </Button>
+            <Button size="large" danger onClick={() => cancelCropImage()}>
+              取消
+            </Button>
+          </Space>
+        </div>
+
+        <Spin spinning={loading}>
+          <Result status="info" title="计算结果"></Result>
+        </Spin>
+
+        <div style={{ position: 'fixed', top: '90vh' }}>
+          <Button size="large" type="primary" loading={loading} onClick={() => handleImageData()}>
+            模型计算
+          </Button>
         </div>
 
         {/* 上传逻辑 */}

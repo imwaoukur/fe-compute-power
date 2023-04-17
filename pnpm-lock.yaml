@@ -1,33 +1,27 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@amap/amap-jsapi-loader': ^1.0.1
   '@amap/screenshot': ^0.0.3
-  '@ant-design/icons': ^5.0.1
   '@types/react': ^18.0.28
   '@types/react-dom': ^18.0.11
   '@vitejs/plugin-react': ^3.1.0
   antd: ^5.4.0
   cropperjs: ^1.5.13
-  html2canvas: ^1.4.1
-  js-web-screen-shot: ^1.9.0
   react: ^18.2.0
-  react-cropper: ^2.3.3
   react-dom: ^18.2.0
   typescript: ^4.9.3
   vite: ^4.2.0
 
 dependencies:
+  '@amap/amap-jsapi-loader': registry.npmmirror.com/@amap/amap-jsapi-loader/1.0.1
   '@amap/screenshot': registry.npmmirror.com/@amap/screenshot/0.0.3
   antd: registry.npmmirror.com/antd/5.4.0_biqbaboplfbrettd7655fr4n2y
   cropperjs: registry.npmmirror.com/cropperjs/1.5.13
-  html2canvas: registry.npmmirror.com/html2canvas/1.4.1
-  js-web-screen-shot: registry.npmmirror.com/js-web-screen-shot/1.9.2
   react: registry.npmmirror.com/react/18.2.0
-  react-cropper: registry.npmmirror.com/react-cropper/2.3.3_react@18.2.0
   react-dom: registry.npmmirror.com/react-dom/18.2.0_react@18.2.0
 
 devDependencies:
-  '@ant-design/icons': registry.npmmirror.com/@ant-design/icons/5.0.1_biqbaboplfbrettd7655fr4n2y
   '@types/react': registry.npmmirror.com/@types/react/18.0.33
   '@types/react-dom': registry.npmmirror.com/@types/react-dom/18.0.11
   '@vitejs/plugin-react': registry.npmmirror.com/@vitejs/plugin-react/3.1.0_vite@4.2.1
@@ -35,6 +29,12 @@ devDependencies:
   vite: registry.npmmirror.com/vite/4.2.1
 
 packages:
+
+  registry.npmmirror.com/@amap/amap-jsapi-loader/1.0.1:
+    resolution: {integrity: sha512-nPyLKt7Ow/ThHLkSvn2etQlUzqxmTVgK7bIgwdBRTg2HK5668oN7xVxkaiRe3YZEzGzfV2XgH5Jmu2T73ljejw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@amap/amap-jsapi-loader/-/amap-jsapi-loader-1.0.1.tgz}
+    name: '@amap/amap-jsapi-loader'
+    version: 1.0.1
+    dev: false
 
   registry.npmmirror.com/@amap/screenshot/0.0.3:
     resolution: {integrity: sha512-4THgormzse01FyGDLnWdFIN96Pb3DvoJoI98SXgyOBeJ3Bya5vPSedV14DnEhusGsDPgF1844yMC9+DreEG0yQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@amap/screenshot/-/screenshot-0.0.3.tgz}
@@ -61,6 +61,7 @@ packages:
     version: 7.0.0
     dependencies:
       '@ctrl/tinycolor': registry.npmmirror.com/@ctrl/tinycolor/3.6.0
+    dev: false
 
   registry.npmmirror.com/@ant-design/cssinjs/1.8.1_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-pOQJV9H9viB6qB9u7hkpKEOIQGx4dd8zjpwzF1v8YNwjffbZTlyUNQYln56gwpFF7SFskpYpnSfgoqTK4sFE/Q==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@ant-design/cssinjs/-/cssinjs-1.8.1.tgz}
@@ -86,6 +87,7 @@ packages:
     resolution: {integrity: sha512-EB0iwlKDGpG93hW8f85CTJTs4SvMX7tt5ceupvhALp1IF44SeUFOMhKUOYqpsoYWQKAOuTRDMqn75rEaKDp0Xw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@ant-design/icons-svg/-/icons-svg-4.2.1.tgz}
     name: '@ant-design/icons-svg'
     version: 4.2.1
+    dev: false
 
   registry.npmmirror.com/@ant-design/icons/5.0.1_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-ZyF4ksXCcdtwA/1PLlnFLcF/q8/MhwxXhKHh4oCHDA4Ip+ZzAHoICtyp4wZWfiCVDP0yuz3HsjyvuldHFb3wjA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@ant-design/icons/-/icons-5.0.1.tgz}
@@ -104,6 +106,7 @@ packages:
       rc-util: registry.npmmirror.com/rc-util/5.29.3_biqbaboplfbrettd7655fr4n2y
       react: registry.npmmirror.com/react/18.2.0
       react-dom: registry.npmmirror.com/react-dom/18.2.0_react@18.2.0
+    dev: false
 
   registry.npmmirror.com/@ant-design/react-slick/1.0.0_react@18.2.0:
     resolution: {integrity: sha512-OKxZsn8TAf8fYxP79rDXgLs9zvKMTslK6dJ4iLhDXOujUqC5zJPBRszyrcEHXcMPOm1Sgk40JgyF3yiL/Swd7w==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@ant-design/react-slick/-/react-slick-1.0.0.tgz}
@@ -357,6 +360,7 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: registry.npmmirror.com/regenerator-runtime/0.13.11
+    dev: false
 
   registry.npmmirror.com/@babel/template/7.20.7:
     resolution: {integrity: sha512-8SegXApWe6VoNw0r9JHpSteLKTpTiLZ4rMlGIm9JQ18KiCtyQiAMEazujAHrUS5flrcqYZa75ukev3P6QmUwUw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@babel/template/-/template-7.20.7.tgz}
@@ -405,6 +409,7 @@ packages:
     name: '@ctrl/tinycolor'
     version: 3.6.0
     engines: {node: '>=10'}
+    dev: false
 
   registry.npmmirror.com/@emotion/hash/0.8.0:
     resolution: {integrity: sha512-kBJtf7PH6aWwZ6fka3zQ0p6SBYzx4fl1LoZXE2RrnYST9Xljm7WfKJrU4g/Xr3Beg72MLrp1AWNUmuYJTL7Cow==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@emotion/hash/-/hash-0.8.0.tgz}
@@ -980,6 +985,7 @@ packages:
     resolution: {integrity: sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/classnames/-/classnames-2.3.2.tgz}
     name: classnames
     version: 2.3.2
+    dev: false
 
   registry.npmmirror.com/color-convert/1.9.3:
     resolution: {integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/color-convert/-/color-convert-1.9.3.tgz}
@@ -1181,14 +1187,6 @@ packages:
     name: js-tokens
     version: 4.0.0
 
-  registry.npmmirror.com/js-web-screen-shot/1.9.2:
-    resolution: {integrity: sha512-iBLxNsdsgF8kxoc5qgkU0MUxbhKmK7pTMefD3NuVSgjaDcchh5Zcj+MChIs3wg1aXkHKFuZKMw9YlU++EUrzdw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/js-web-screen-shot/-/js-web-screen-shot-1.9.2.tgz}
-    name: js-web-screen-shot
-    version: 1.9.2
-    dependencies:
-      html2canvas: registry.npmmirror.com/html2canvas/1.4.1
-    dev: false
-
   registry.npmmirror.com/jsesc/2.5.2:
     resolution: {integrity: sha512-OYu7XEzjkCQ3C5Ps3QIZsQfNpqoJyZZA99wd9aWd05NCtC5pWOkShK2mkL6HXQR6/Cy2lbNdPlZBpuQHXE63gA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/jsesc/-/jsesc-2.5.2.tgz}
     name: jsesc
@@ -1220,6 +1218,7 @@ packages:
     hasBin: true
     dependencies:
       js-tokens: registry.npmmirror.com/js-tokens/4.0.0
+    dev: false
 
   registry.npmmirror.com/lru-cache/5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/lru-cache/-/lru-cache-5.1.1.tgz}
@@ -1918,6 +1917,7 @@ packages:
       react: registry.npmmirror.com/react/18.2.0
       react-dom: registry.npmmirror.com/react-dom/18.2.0_react@18.2.0
       react-is: registry.npmmirror.com/react-is/16.13.1
+    dev: false
 
   registry.npmmirror.com/rc-virtual-list/3.4.13_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-cPOVDmcNM7rH6ANotanMDilW/55XnFPw0Jh/GQYtrzZSy3AmWvCnqVNyNC/pgg3lfVmX2994dlzAhuUrd4jG7w==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/rc-virtual-list/-/rc-virtual-list-3.4.13.tgz}
@@ -1937,18 +1937,6 @@ packages:
       react-dom: registry.npmmirror.com/react-dom/18.2.0_react@18.2.0
     dev: false
 
-  registry.npmmirror.com/react-cropper/2.3.3_react@18.2.0:
-    resolution: {integrity: sha512-zghiEYkUb41kqtu+2jpX2Ntigf+Jj1dF9ew4lAobPzI2adaPE31z0p+5TcWngK6TvmWQUwK3lj4G+NDh1PDQ1w==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react-cropper/-/react-cropper-2.3.3.tgz}
-    id: registry.npmmirror.com/react-cropper/2.3.3
-    name: react-cropper
-    version: 2.3.3
-    peerDependencies:
-      react: '>=17.0.2'
-    dependencies:
-      cropperjs: registry.npmmirror.com/cropperjs/1.5.13
-      react: registry.npmmirror.com/react/18.2.0
-    dev: false
-
   registry.npmmirror.com/react-dom/18.2.0_react@18.2.0:
     resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react-dom/-/react-dom-18.2.0.tgz}
     id: registry.npmmirror.com/react-dom/18.2.0
@@ -1960,11 +1948,13 @@ packages:
       loose-envify: registry.npmmirror.com/loose-envify/1.4.0
       react: registry.npmmirror.com/react/18.2.0
       scheduler: registry.npmmirror.com/scheduler/0.23.0
+    dev: false
 
   registry.npmmirror.com/react-is/16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react-is/-/react-is-16.13.1.tgz}
     name: react-is
     version: 16.13.1
+    dev: false
 
   registry.npmmirror.com/react-refresh/0.14.0:
     resolution: {integrity: sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react-refresh/-/react-refresh-0.14.0.tgz}
@@ -1980,11 +1970,13 @@ packages:
     engines: {node: '>=0.10.0'}
     dependencies:
       loose-envify: registry.npmmirror.com/loose-envify/1.4.0
+    dev: false
 
   registry.npmmirror.com/regenerator-runtime/0.13.11:
     resolution: {integrity: sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz}
     name: regenerator-runtime
     version: 0.13.11
+    dev: false
 
   registry.npmmirror.com/resize-observer-polyfill/1.5.1:
     resolution: {integrity: sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/resize-observer-polyfill/-/resize-observer-polyfill-1.5.1.tgz}
@@ -2019,6 +2011,7 @@ packages:
     version: 0.23.0
     dependencies:
       loose-envify: registry.npmmirror.com/loose-envify/1.4.0
+    dev: false
 
   registry.npmmirror.com/scroll-into-view-if-needed/3.0.8:
     resolution: {integrity: sha512-gHw7Dia3koOUlJvOJnxL9VCqGEmh5kf449FrvhnG9K28D9UXqdkQtw9nUnkauPcdadM3GuPD1J8XgdiPpFtHyg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/scroll-into-view-if-needed/-/scroll-into-view-if-needed-3.0.8.tgz}
