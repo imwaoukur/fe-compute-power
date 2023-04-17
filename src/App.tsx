@@ -10,6 +10,7 @@ import AMap from './components/map'
 function App() {
   const [cropLoading, setCropLoading] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [result, setResult] = useState()
   // 地图实例
   const mapIns = useRef<any>()
 
@@ -48,6 +49,7 @@ function App() {
       computePowerByImage(imgBase64, scale)
         .then((res) => {
           console.log(res)
+          setResult(res)
         })
         .finally(() => {
           setLoading(false)
@@ -86,7 +88,9 @@ function App() {
         </div>
 
         <Spin spinning={loading}>
-          <Result status="info" title="计算结果"></Result>
+          <Result status="info" title="计算结果">
+            {result && <div>{JSON.stringify(result)}</div>}
+          </Result>
         </Spin>
 
         <div style={{ position: 'fixed', top: '90vh' }}>
