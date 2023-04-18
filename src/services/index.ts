@@ -1,12 +1,12 @@
 export const computePowerByImage = (image: string, scale: number) => {
-  return fetch('http://localhost:4000', {
+  return fetch('http://localhost:8000/pixel-count/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      image,
-      scale,
+      image_data: image,
+      resolution: scale,
     }),
   })
 }

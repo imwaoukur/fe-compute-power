@@ -38,18 +38,21 @@ function App() {
         setCropLoading(false)
       })
   }
-
+  
   const handleImageData = () => {
     if (cropperRef.current) {
       setLoading(true)
       const imgBase64 = cropperRef.current.getCroppedCanvas().toDataURL('image/png')
       // 代表 当前屏幕中一米代表实际距离多少米 传给后端
       const scale = mapIns.current.getScale()
-
+      //const image_length = imgBase64.length
+      // console.log("image_length: " + image_length)
       computePowerByImage(imgBase64, scale)
-        .then((res) => {
-          console.log(res)
-          setResult(res)
+        .then(res => res.json())
+        .then(data => {
+          console.log("data:", data)
+          const count = data.count;
+          setResult(count)
         })
         .finally(() => {
           setLoading(false)
